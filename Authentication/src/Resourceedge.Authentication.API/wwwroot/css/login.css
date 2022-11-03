@@ -1,0 +1,36 @@
+#check-icon,
+#password-icon {
+  display: none;
+cursor: pointer;
+}
+
+/* Employee Details */
+
+#employee-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+#employee-details h3 {
+  font-size: 19px;
+  line-height: 24px;
+  color: #172b4d;
+  font-weight: 700;
+}
+
+fieldset.login-password {
+  display: block;
+}
+
+.employee-contact--details {
+  display: block;
+  margin-left: 8px;
+  margin-right: 16px;
+}
+
+#employee-details p {
+  font-weight: 450;
+  font-size: 12px;
+  line-height: 16px;
+  color: #7a869a;
+}

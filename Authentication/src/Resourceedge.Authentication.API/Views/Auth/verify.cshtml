@@ -1,0 +1,85 @@
+﻿@model LoginViewModel
+
+@{
+    // var modelGet = (LoginGetViewModel)ViewData;
+}
+<section class="auth-wrapper">
+    <h2>Log in</h2>
+    <p>Access your resource edge account</p>
+    <div id="employee-details">
+        <span><img src="~/assets/Avatar.png" alt="avatar" /></span>
+        <div class="employee-contact--details">
+            <h3>@Model.Name</h3>
+            <p>@Model.UserName</p>
+        </div>
+
+        <a asp-action="VerifyEmail">
+            <svg width="25"
+                 height="25"
+                 viewBox="0 0 25 25"
+                 fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <rect width="24"
+                      height="24"
+                      transform="translate(0.5 0.527344)"
+                      fill="white"
+                      fill-opacity="0.01" />
+                <path fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M4.52026 19.7573C4.48715 19.9193 4.49472 20.087 4.5423 20.2454C4.58988 20.4037 4.67598 20.5478 4.79289 20.6647C4.90981 20.7816 5.05389 20.8677 5.21224 20.9153C5.37059 20.9629 5.53826 20.9705 5.70026 20.9373L9.51026 20.1573L5.30026 15.9473L4.52026 19.7573ZM20.3443 7.23435L18.2243 5.11235C18.0384 4.92643 17.8176 4.77904 17.5746 4.67865C17.3316 4.57826 17.0712 4.52685 16.8083 4.52735C16.2963 4.52735 15.7843 4.72235 15.3933 5.11235L5.63626 14.8703L10.5863 19.8203L20.3433 10.0623C20.7182 9.68729 20.9288 9.17868 20.9288 8.64835C20.9288 8.11802 20.7182 7.6094 20.3433 7.23435H20.3443Z"
+                      fill="#A5ADBA" />
+            </svg>
+        </a>
+    </div>
+    <form asp-controller="Auth" asp-action="Authenticate" method="post" id="login-form">
+
+        <fieldset class="login login-password">
+            <label for="employee-password" class="password-label">
+                <p>Password</p>
+            </label>
+            <div class="password input-field--container">
+                <span class="icon-container" id="icon-container">
+                    <svg width="20"
+                         height="17"
+                         viewBox="0 0 20 17"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg"
+                         id="password-icon">
+                        <path fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M10 14.5273C5.464 14.5273 2.001 10.2673 2.001 8.52734C2.001 6.52634 5.46 2.52734 10.001 2.52734C14.377 2.52734 17.999 6.50034 17.999 8.52734C17.999 10.2673 14.537 14.5273 10.001 14.5273H10ZM10.001 0.527344C4.48 0.527344 0 5.36834 0 8.52734C0 11.6133 4.576 16.5273 10 16.5273C15.423 16.5273 20 11.6133 20 8.52734C20 5.36834 15.52 0.527344 10 0.527344"
+                              fill="#42526E" />
+                        <path fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M9.977 10.5113C8.874 10.5113 7.977 9.61434 7.977 8.51134C7.977 7.40834 8.874 6.51134 9.977 6.51134C11.081 6.51134 11.977 7.40834 11.977 8.51134C11.977 9.61434 11.081 10.5113 9.977 10.5113ZM9.977 4.51134C7.771 4.51134 5.977 6.30534 5.977 8.51134C5.977 10.7173 7.771 12.5113 9.977 12.5113C12.184 12.5113 13.977 10.7173 13.977 8.51134C13.977 6.30534 12.184 4.51134 9.977 4.51134Z"
+                              fill="#42526E" />
+                    </svg>
+                </span>
+
+                <input type="hidden" name="Username" value="@Model.UserName" />
+                <input type="hidden" name="Name" value="@Model.Name" />
+                <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
+                <input name="Password"
+                       type="password"
+                       id="employee-password"
+                       placeholder="Enter password"
+                       autofocus />
+                @if (ViewBag.Error != null)
+                {
+                    <span class="error-container">
+                        <img src="~/assets/error-icon.png" alt="error-icon" />
+                        <p class="error-text">@ViewBag.Error.ToString()</p>
+                    </span>
+                }
+
+            </div>
+        </fieldset>
+        <button class="primary"
+                id="login-submit-button"
+                type="submit" disabled>
+            Log In
+        </button>
+    </form>
+    <a asp-action="PasswordReset" class="link">Forgot Password?</a>
+</section>
+<script type="text/javascript" src="~/js/login.js"></script>

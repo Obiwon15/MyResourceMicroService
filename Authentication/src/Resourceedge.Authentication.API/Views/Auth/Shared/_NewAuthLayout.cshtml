@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/login.css" />
+    <link rel="stylesheet" href="~/css/index.css" />
+    <link rel="stylesheet" href="~/css/forgotPassword.css" />
+
+</head>
+<body>
+    <header class="auth--logo-container">
+        <img src="~/assets/re-ten--logo.svg" alt="logo" />
+    </header>
+    <main class="res-auth-page">
+        @RenderBody()
+    </main>
+    <script type="text/javascript" src="~/js/index.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

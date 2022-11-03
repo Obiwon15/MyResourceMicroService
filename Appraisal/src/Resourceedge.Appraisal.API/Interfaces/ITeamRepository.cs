@@ -1,0 +1,25 @@
+﻿using Resourceedge.Appraisal.Domain.Dtos;
+using Resourceedge.Appraisal.Domain.Entities;
+using Resourceedge.Appraisal.Domain.Models;
+using Resourceedge.Common.Archive;
+using Resourceedge.Common.Util;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Resourceedge.Appraisal.API.Interfaces
+{
+    public interface ITeamRepository
+    {
+        Task<IEnumerable<OldEmployeeDto>> GetEmployeesToAppraise(int employeeId);
+        Task<IEnumerable<AppraisalKeyResultAreaForViewDto>> GetTeamMemberKpi(int MyId, int TeammeberId);
+        IEnumerable<AppraisalKeyResultAreaForViewDto> UpdateWhoAmIForList(IEnumerable<KeyResultArea> resultArea, int employeeId);
+        Task<IEnumerable<OldEmployeeForViewDto>> GetSupervisors(int empId, string searchPAram, string orderParam);
+        Task<IEnumerable<OldEmployeeDto>> GetEmployeesToApproveEPA(int employeeId, string type);
+        Task<IEnumerable<OldEmployeeDto>> FetchEmployeesDetailsFromEmployeeService(IEnumerable<string> Ids);
+        Task<IEnumerable<OldEmployeeDto>> GetDistinctEmployeeIncludedinAppraisal(Participants participants);
+        Task<List<int>> GetEmployeeIDs();
+        Task<OldEmployeeForViewDto> GetEmployee(int empId);
+    }
+}

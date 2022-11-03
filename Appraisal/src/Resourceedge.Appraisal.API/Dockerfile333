@@ -1,0 +1,47 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+RUN mkdir EmailTemplate
+COPY ["/Appraisal/src/Resourceedge.Appraisal.API/EmailTemplate", "/app/EmailTemplate"]
+
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+WORKDIR /src
+COPY ["Resourceedge.Worker.Auth/Resourceedge.Worker.Auth.csproj", "Resourceedge.Worker.Auth/"]
+COPY ["Appraisal/src/Resourceedge.Appraisal.API/Resourceedge.Appraisal.API.csproj", "src/Resourceedge.Appraisal.API/"]
+COPY ["Resourceedge.Worker.Common/Resourceedge.Worker.Common.csproj", "Resourceedge.Worker.Common/"]
+COPY ["Resourceedge.Email.Api/Resourceedge.Email.Api.csproj", "Resourceedge.Email.Api/"]
+COPY ["Appraisal/src/Resourceedge.Appraisal.Domain/Resourceedge.Appraisal.Domain.csproj", "Resourceedge.Appraisal.Domain/"]
+COPY ["Common/Resourceedge.Common/Resourceedge.Common.csproj", "Common/Resourceedge.Common/"]
+
+#CMD cp  ./* ./Resourceedge.Appraisal.API
+
+#COPY . ./Resourceedge.Appraisal.API
+
+
+RUN dotnet restore "src/Resourceedge.Appraisal.API/Resourceedge.Appraisal.API.csproj"
+#COPY . .
+
+#COPY ["/Common/Resourceedge.Common/Resourceedge.Common.csproj", "Resourceedge.Appraisal.API/"]
+#COPY ["Appraisal/src/Resourceedge.Appraisal.Domain/*", "Resourceedge.Appraisal.API/"]
+#CMD cp ./Resourceedge.Appraisal.Domain/* ./Resourceedge.Appraisal.API/
+#COPY ["Appraisal/src/Resourceedge.Appraisal.API/*", "Resourceedge.Appraisal.API/"]
+#COPY ["/**/*", "Resourceedge.Appraisal.API/"]
+
+
+
+ 
+#WORKDIR "Resourceedge.Appraisal.API"
+#RUN dotnet build "Resourceedge.Appraisal.API.csproj" -c Release -o /app/build
+#
+#FROM build AS publish
+#RUN dotnet publish "Resourceedge.Appraisal.API.csproj" -c Release -o /app/publish
+#
+#FROM base AS final
+#WORKDIR /app
+#RUN mkdir AppraisalResult 
+#COPY --from=publish /app/publish .
+#ENTRYPOINT ["dotnet", "Resourceedge.Appraisal.API.dll"]

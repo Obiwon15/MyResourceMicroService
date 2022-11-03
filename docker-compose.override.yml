@@ -1,0 +1,72 @@
+version: '3.4'
+
+services:
+  #resourceedge.apigateway:
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Production
+  #    - ASPNETCORE_URLS=https://+:443;http://+:80
+  #  ports:
+  #    - "5001:80"
+  #    - "5000:443"
+  #  volumes:
+  #    - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+   Appraisal:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - DefaultConnection__ConnectionString=mongodb+srv://emma:%40A1234567@lawyerpp-cluster-5faak.mongodb.net/EdgeAppraisal?retryWrites=true&w=majority
+      - DefaultConnection__DataBaseName=EdgeAppraisal
+      - SendGrid__SENDGRID_API_KEY=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
+    ports:
+      - "6001:80"
+      - "6000:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+   Authentication:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - SendGrid__SENDGRID_API_KEY=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
+    ports:
+      - "7001:80"
+      - "7000:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+   Employee:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - SendGrid__SENDGRID_API_KEY=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
+      - DefaultConnection__ConnectionString=mongodb+srv://edgeadmin:9o2oNXbr9kmuDrwI@version1cluster-j74f5.mongodb.net/EdgeEmployee?retryWrites=true&w=majority
+      - DefaultConnection__DataBaseName=EdgeEmployee
+    ports:
+      - "8001:80"
+      - "8000:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  #resourceedge.operations.api:
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Production
+  #    - ASPNETCORE_URLS=https://+:443;http://+:80
+  #  ports:
+  #    - "9001:80"
+  #    - "9000:443"
+  #  volumes:
+  #    - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  #resourceedge.apiocelot:
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Production
+  #    - ASPNETCORE_URLS=https://+:443;http://+:80
+  #  ports:
+  #    - "4001:80"
+  #    - "4000:443"
+  #  volumes:
+  #    - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

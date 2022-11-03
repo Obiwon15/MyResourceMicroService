@@ -1,0 +1,62 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/Appraisal/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "catalog-api",
+          "Host": "Localhost",
+          "Port": 6001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Appraisal/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Employee/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "Localhost",
+          "Port": 8001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Employee/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/Auth/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "Localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/Auth/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]      
+    }
+  ],
+  "AnonymousRoutes": {
+    "Routes": [
+      "/Auth/verifyEmail",
+      "/Auth/Authenticate",
+      "/Auth/ForgotPassword",
+      "/Auth/PasswordRest",
+      "/Auth/ResetPassword"
+    ]
+  },
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration"
+  }
+}

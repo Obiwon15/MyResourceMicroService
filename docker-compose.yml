@@ -1,0 +1,66 @@
+version: '3.4'
+
+services:
+  #mongo:
+  #  image: mongo
+  #  ports:
+  #    - '27017:27017'
+
+  #rabbitmq:
+  #  image: rabbitmq:3-management
+  #  ports:
+  #    - '5672:5672'
+  #    - '15672:15672'
+
+  #redis:
+  #  image: redis
+  #  ports:
+  #    - '6379:6379'
+
+  #resourceedge.apigateway:
+  #  image: ${DOCKER_REGISTRY-}resourceedgeapigateway
+  #  build:
+  #    context: .
+  #    dockerfile: ApiGateway/src/Resourceedge.ApiGateway/Dockerfile
+
+  Appraisal:
+    image: ${DOCKER_REGISTRY-}resourceedgeappraisalapi
+    container_name: Appraisal-System
+    build:
+      context: .
+      dockerfile: Appraisal/src/Resourceedge.Appraisal.API/Dockerfile
+
+
+  Authentication:
+   image: ${DOCKER_REGISTRY-}resourceedgeauthenticationapi
+   container_name: Auth-System
+   build:
+     context: .
+     dockerfile: Authentication/src/Resourceedge.Authentication.API/Dockerfile
+
+
+  Employee:
+   image: ${DOCKER_REGISTRY-}resourceedgeemployeeapi
+   container_name: Employee-System
+   build:
+     context: .
+     dockerfile: Employee/src/Resourceedge.Employee.API/Dockerfile
+
+
+  #resourceedge.operations.api:
+  #  image: ${DOCKER_REGISTRY-}resourceedgeoperationsapi
+  #  build:
+  #    context: .
+  #    dockerfile: Operations/src/Resourceedge.Operations.Api/Dockerfile
+
+  #resourceedge.apiocelot:
+  #  image: ${DOCKER_REGISTRY-}resourceedgeapiocelot
+  #  build:
+  #    context: .
+  #    dockerfile: ApiGatewayOcelot/src/Resourceedge.ApiOcelot/Dockerfile
+
+networks:
+  resourceedge : 
+    driver: bridge
+
+

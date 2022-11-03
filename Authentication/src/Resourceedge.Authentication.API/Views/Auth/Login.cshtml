@@ -1,0 +1,52 @@
+﻿@model VerifyEmail
+
+@{
+    var modelGet = (LoginGetViewModel)ViewData["modelDetails"];
+}
+
+<section class="auth-wrapper">
+    <h2>Log in</h2>
+    <p>Access your resource edge account</p>
+    <form asp-controller="Auth" asp-action="VerifyEmail" method="post" id="login-form">
+        <fieldset class="login login-email">
+            <label for="email-address" class="email-label">
+                <p>Email Address</p>
+            </label>
+            <div class="email input-field--container">
+                <span class="icon-container" id="icon-container">
+                    <svg width="14"
+                         height="11"
+                         viewBox="0 0 14 11"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg"
+                         id="check-icon">
+                        <path d="M1.73439 4.84927C1.55385 4.65725 1.3048 4.54428 1.0414 4.53491C0.778003 4.52555 0.521558 4.62054 0.32783 4.79925C0.134101 4.97795 0.0187561 5.22591 0.00687666 5.48921C-0.00500279 5.75251 0.0875437 6.00985 0.264392 6.20527L3.87639 10.1243C4.41339 10.6503 5.21339 10.6503 5.71039 10.1543L6.07439 9.79527C7.38892 8.50249 8.70193 7.20816 10.0134 5.91227L10.0534 5.87227C11.2791 4.66433 12.4984 3.44998 13.7114 2.22927C13.8927 2.03947 13.9921 1.786 13.9881 1.52356C13.9842 1.26113 13.8772 1.01076 13.6903 0.826484C13.5034 0.642209 13.2516 0.538802 12.9891 0.538575C12.7266 0.538347 12.4746 0.641319 12.2874 0.82527C11.0801 2.03961 9.8667 3.24796 8.64739 4.45027L8.60739 4.49027C7.35066 5.73256 6.09233 6.97323 4.83239 8.21227L1.73439 4.84927Z"
+                              fill="#36B37E" />
+                    </svg>
+                </span>
+                <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
+
+                <input name="email"
+                       type="email"
+                       id="email-address"
+                       placeholder="Enter email"
+                       autofocus />
+                @if (ViewBag.Error != null)
+                {
+                    <span class="error-container">
+                        <img src="~/assets/error-icon.png" alt="error-icon" />
+                        <p class="error-text">@ViewBag.Error.ToString()</p>
+                    </span>
+                }
+            </div>
+        </fieldset>
+        <button class="primary"
+                id="login-submit-button"
+                type="submit" Disabled>
+            Continue
+        </button>
+    </form>
+
+    <a asp-action="PasswordReset" class="link">Forgot Password?</a>
+</section>
+<script type="text/javascript" src="~/js/login.js"></script>
